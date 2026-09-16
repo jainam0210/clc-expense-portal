@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --background: #000000;
+  --foreground: #fafafa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  background: #000;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: #fafafa;
+  color: #000;
+}
+
+/* ---------- Shared UI primitives ---------- */
+@utility card {
+  @apply rounded-2xl border border-white/[0.07] bg-white/[0.02];
+}
+@utility input {
+  @apply mt-1.5 w-full rounded-xl border border-white/10 bg-black px-3.5 py-2.5 text-base text-zinc-100 outline-none transition sm:text-sm placeholder:text-zinc-600 hover:border-white/20 focus:border-white/40 focus:ring-4 focus:ring-white/5;
+}
+@utility field {
+  @apply text-[13px] font-medium text-zinc-400;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-primary {
+  @apply btn bg-white text-black hover:bg-zinc-200;
+}
+@utility btn-secondary {
+  @apply btn border border-white/10 text-zinc-200 hover:border-white/20 hover:bg-white/5;
+}
+@utility btn-danger {
+  @apply btn border border-red-500/20 text-red-300 hover:bg-red-500/10;
+}
+@utility btn-sm {
+  @apply px-3 py-1.5 text-xs;
+}
+@utility link {
+  @apply font-medium text-zinc-100 underline decoration-white/25 underline-offset-4 transition hover:decoration-white;
+}
+@utility eyebrow {
+  @apply text-[11px] font-medium uppercase tracking-[0.12em] text-zinc-500;
+}
+@utility alert-error {
+  @apply rounded-xl border border-red-500/20 bg-red-500/5 px-3 py-2 text-sm text-red-300;
+}
+@utility alert-warn {
+  @apply rounded-xl border border-amber-500/20 bg-amber-500/5 px-3 py-2 text-sm text-amber-300;
+}
+@utility alert-ok {
+  @apply rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-3 py-2 text-sm text-emerald-300;
+}
+
+/* Room for the phone bottom tab bar */
+@media (max-width: 639px) {
+  body:has([data-tabbar]) {
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Slim dark scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 8px;
+}
+
+/* Native inputs respect dark theme */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}
+input[type="file"]::file-selector-button {
+  background: #18181b;
+  color: #fafafa;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.75rem;
+  margin-right: 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+input[type="file"]::file-selector-button:hover {
+  background: #27272a;
+}
